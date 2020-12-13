@@ -10,7 +10,7 @@ if len(sys.argv) != 2 or ".json" not in sys.argv[1]:
     sys.exit()
 
 #Load file into python using json lib
-input_file = open(sys.argv[1], "rU")
+input_file = open(sys.argv[1], "r")
 
 data = json.load(input_file)
 
@@ -23,7 +23,7 @@ while True:
 #Opens and writes the json data into a csv based on the user's input
 with open("Parsed_JSON.csv", 'w') as output_file:
     field_names = data[prop][0].keys()
-    writer = csv.DictWriter(output_file, fieldnames=field_names)
+    writer = csv.DictWriter(output_file, fieldnames=field_names, lineterminator = '\n')
     writer.writeheader()
     for dicts in data[prop]:
         ls = ([(k, x) for x in v] for k, v in dicts.items() if isinstance(v, list))
